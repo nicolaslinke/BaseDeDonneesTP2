@@ -1,0 +1,7 @@
+IF EXISTS(SELECT * FROM sys.databases WHERE name='BaseDeDonnees_TP2')
+BEGIN
+	DROP DATABASE BaseDeDonnees_TP2
+END
+
+CREATE DATABASE BaseDeDonnees_TP2
+GO

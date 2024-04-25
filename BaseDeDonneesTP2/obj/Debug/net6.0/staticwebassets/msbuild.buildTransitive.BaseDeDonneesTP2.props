@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\BaseDeDonneesTP2.props" />
+</Project>
