@@ -1,0 +1,48 @@
+﻿@model IEnumerable<BaseDeDonneesTP2.Models.Unite>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nom)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CoutEnPoint)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Faction)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CoutEnPoint)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Faction.FactionId)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.UniteId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.UniteId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.UniteId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

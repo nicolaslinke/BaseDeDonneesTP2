@@ -1,4 +1,5 @@
 //using BaseDeDonneesTP2.Data;
+using BaseDeDonneesTP2.Data;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -6,8 +7,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 
-//builder.Services.AddDbContext<BaseDeDonnees_TP2Context>(
-//    options => options.UseSqlServer(builder.Configuration.GetConnectionString("BD_TP2")));
+builder.Services.AddDbContext<BaseDeDonnees_TP2Context>(
+    options => options.UseSqlServer(builder.Configuration.GetConnectionString("BD_TP2")));
 
 var app = builder.Build();
 
@@ -16,11 +17,20 @@ if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error");
 }
+
 app.UseStaticFiles();
 
 app.UseRouting();
 
 app.UseAuthorization();
+
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllerRoute(
+        name: "default",
+        pattern: "{controller=Series}/{action=Index}/{id?}"
+        );
+});
 
 app.MapRazorPages();
 
