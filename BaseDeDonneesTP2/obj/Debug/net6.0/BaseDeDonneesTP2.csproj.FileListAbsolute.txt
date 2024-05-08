@@ -1,5 +1,5 @@
-C:\Users\2185802\Downloads\BaseDeDonneesTP2\BaseDeDonneesTP2\bin\Debug\net6.0\Microsoft.CodeAnalysis.Features.dll
-C:\Users\2185802\Downloads\BaseDeDonneesTP2\BaseDeDonneesTP2\bin\Debug\net6.0\ru\Microsoft.CodeAnalysis.CSharp.Features.resources.dll
+C:\Users\2185802\Downloads\BaseDeDonneesTP2\BaseDeDonneesTP2\bin\Debug\net6.0\ru\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\2185802\Downloads\BaseDeDonneesTP2\BaseDeDonneesTP2\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
 C:\Users\2185802\Downloads\BaseDeDonneesTP2\BaseDeDonneesTP2\bin\Debug\net6.0\appsettings.Development.json
 C:\Users\2185802\Downloads\BaseDeDonneesTP2\BaseDeDonneesTP2\bin\Debug\net6.0\appsettings.json
 C:\Users\2185802\Downloads\BaseDeDonneesTP2\BaseDeDonneesTP2\bin\Debug\net6.0\BaseDeDonneesTP2.staticwebassets.runtime.json
@@ -20,6 +20,7 @@ C:\Users\2185802\Downloads\BaseDeDonneesTP2\BaseDeDonneesTP2\bin\Debug\net6.0\Mi
 C:\Users\2185802\Downloads\BaseDeDonneesTP2\BaseDeDonneesTP2\bin\Debug\net6.0\Microsoft.CodeAnalysis.CSharp.dll
 C:\Users\2185802\Downloads\BaseDeDonneesTP2\BaseDeDonneesTP2\bin\Debug\net6.0\Microsoft.CodeAnalysis.CSharp.Features.dll
 C:\Users\2185802\Downloads\BaseDeDonneesTP2\BaseDeDonneesTP2\bin\Debug\net6.0\Microsoft.CodeAnalysis.CSharp.Workspaces.dll
+C:\Users\2185802\Downloads\BaseDeDonneesTP2\BaseDeDonneesTP2\bin\Debug\net6.0\Microsoft.CodeAnalysis.Features.dll
 C:\Users\2185802\Downloads\BaseDeDonneesTP2\BaseDeDonneesTP2\bin\Debug\net6.0\Microsoft.CodeAnalysis.Razor.dll
 C:\Users\2185802\Downloads\BaseDeDonneesTP2\BaseDeDonneesTP2\bin\Debug\net6.0\Microsoft.CodeAnalysis.Scripting.dll
 C:\Users\2185802\Downloads\BaseDeDonneesTP2\BaseDeDonneesTP2\bin\Debug\net6.0\Microsoft.CodeAnalysis.Workspaces.dll
@@ -143,7 +144,6 @@ C:\Users\2185802\Downloads\BaseDeDonneesTP2\BaseDeDonneesTP2\bin\Debug\net6.0\ja
 C:\Users\2185802\Downloads\BaseDeDonneesTP2\BaseDeDonneesTP2\bin\Debug\net6.0\ko\Microsoft.CodeAnalysis.CSharp.resources.dll
 C:\Users\2185802\Downloads\BaseDeDonneesTP2\BaseDeDonneesTP2\bin\Debug\net6.0\pl\Microsoft.CodeAnalysis.CSharp.resources.dll
 C:\Users\2185802\Downloads\BaseDeDonneesTP2\BaseDeDonneesTP2\bin\Debug\net6.0\pt-BR\Microsoft.CodeAnalysis.CSharp.resources.dll
-C:\Users\2185802\Downloads\BaseDeDonneesTP2\BaseDeDonneesTP2\bin\Debug\net6.0\ru\Microsoft.CodeAnalysis.CSharp.resources.dll
 C:\Users\2185802\Downloads\BaseDeDonneesTP2\BaseDeDonneesTP2\bin\Debug\net6.0\tr\Microsoft.CodeAnalysis.CSharp.resources.dll
 C:\Users\2185802\Downloads\BaseDeDonneesTP2\BaseDeDonneesTP2\bin\Debug\net6.0\zh-Hans\Microsoft.CodeAnalysis.CSharp.resources.dll
 C:\Users\2185802\Downloads\BaseDeDonneesTP2\BaseDeDonneesTP2\bin\Debug\net6.0\zh-Hant\Microsoft.CodeAnalysis.CSharp.resources.dll
@@ -156,6 +156,7 @@ C:\Users\2185802\Downloads\BaseDeDonneesTP2\BaseDeDonneesTP2\bin\Debug\net6.0\ja
 C:\Users\2185802\Downloads\BaseDeDonneesTP2\BaseDeDonneesTP2\bin\Debug\net6.0\ko\Microsoft.CodeAnalysis.CSharp.Features.resources.dll
 C:\Users\2185802\Downloads\BaseDeDonneesTP2\BaseDeDonneesTP2\bin\Debug\net6.0\pl\Microsoft.CodeAnalysis.CSharp.Features.resources.dll
 C:\Users\2185802\Downloads\BaseDeDonneesTP2\BaseDeDonneesTP2\bin\Debug\net6.0\pt-BR\Microsoft.CodeAnalysis.CSharp.Features.resources.dll
+C:\Users\2185802\Downloads\BaseDeDonneesTP2\BaseDeDonneesTP2\bin\Debug\net6.0\ru\Microsoft.CodeAnalysis.CSharp.Features.resources.dll
 C:\Users\2185802\Downloads\BaseDeDonneesTP2\BaseDeDonneesTP2\bin\Debug\net6.0\tr\Microsoft.CodeAnalysis.CSharp.Features.resources.dll
 C:\Users\2185802\Downloads\BaseDeDonneesTP2\BaseDeDonneesTP2\bin\Debug\net6.0\zh-Hans\Microsoft.CodeAnalysis.CSharp.Features.resources.dll
 C:\Users\2185802\Downloads\BaseDeDonneesTP2\BaseDeDonneesTP2\bin\Debug\net6.0\zh-Hant\Microsoft.CodeAnalysis.CSharp.Features.resources.dll
@@ -211,7 +212,6 @@ C:\Users\2185802\Downloads\BaseDeDonneesTP2\BaseDeDonneesTP2\bin\Debug\net6.0\ru
 C:\Users\2185802\Downloads\BaseDeDonneesTP2\BaseDeDonneesTP2\bin\Debug\net6.0\tr\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\2185802\Downloads\BaseDeDonneesTP2\BaseDeDonneesTP2\bin\Debug\net6.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\2185802\Downloads\BaseDeDonneesTP2\BaseDeDonneesTP2\bin\Debug\net6.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
-C:\Users\2185802\Downloads\BaseDeDonneesTP2\BaseDeDonneesTP2\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
 C:\Users\2185802\Downloads\BaseDeDonneesTP2\BaseDeDonneesTP2\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
 C:\Users\2185802\Downloads\BaseDeDonneesTP2\BaseDeDonneesTP2\bin\Debug\net6.0\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll
 C:\Users\2185802\Downloads\BaseDeDonneesTP2\BaseDeDonneesTP2\bin\Debug\net6.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
