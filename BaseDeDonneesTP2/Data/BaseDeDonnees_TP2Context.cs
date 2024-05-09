@@ -28,6 +28,8 @@ namespace BaseDeDonneesTP2.Data
         public virtual DbSet<Modele> Modeles { get; set; } = null!;
         public virtual DbSet<ModeleDansUnite> ModeleDansUnites { get; set; } = null!;
         public virtual DbSet<Unite> Unites { get; set; } = null!;
+        public virtual DbSet<VwAttributsDunite> VwAttributsDunites { get; set; } = null!;
+        public virtual DbSet<VwDataSheet> VwDataSheets { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -113,6 +115,16 @@ namespace BaseDeDonneesTP2.Data
                     .WithMany(p => p.Unites)
                     .HasForeignKey(d => d.FactionId)
                     .HasConstraintName("FK_Unite_FactionID");
+            });
+
+            modelBuilder.Entity<VwAttributsDunite>(entity =>
+            {
+                entity.ToView("vw_attributsDUnites", "Unites");
+            });
+
+            modelBuilder.Entity<VwDataSheet>(entity =>
+            {
+                entity.ToView("vw_dataSheet", "Unites");
             });
 
             OnModelCreatingPartial(modelBuilder);

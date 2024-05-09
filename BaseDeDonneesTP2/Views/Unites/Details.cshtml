@@ -1,5 +1,4 @@
-﻿@model BaseDeDonneesTP2.Models.Unite
-
+﻿@model IEnumerable<BaseDeDonneesTP2.Models.VwDataSheet>
 @{
     ViewData["Title"] = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -8,30 +7,64 @@
 <h1>Details</h1>
 
 <div>
-    <h4>Unite</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Nom)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Nom)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CoutEnPoint)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CoutEnPoint)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Faction)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Faction.FactionId)
-        </dd>
-    </dl>
+    <h4>@Html.DisplayFor(modelItem => Model.FirstOrDefault().NomUnite)</h4>
+    <h3>@Html.DisplayFor(modelItem => Model.FirstOrDefault().CoutEnPoint)</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.NomModele)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Mouvement)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Endurance)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Sauvegarde)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Pv)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Commandement)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ControleObjectif)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NomModele)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Mouvement)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Endurance)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Sauvegarde)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Pv)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Commandement)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ControleObjectif)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.UniteId">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>

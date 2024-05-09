@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BaseDeDonneesTP2.Data;
 using BaseDeDonneesTP2.Models;
+using Microsoft.Data.SqlClient;
 
 namespace BaseDeDonneesTP2.Controllers
 {
@@ -22,8 +23,9 @@ namespace BaseDeDonneesTP2.Controllers
         // GET: Unites
         public async Task<IActionResult> Index()
         {
-            var baseDeDonnees_TP2Context = _context.Unites.Include(u => u.Faction);
-            return View(await baseDeDonnees_TP2Context.ToListAsync());
+            return View(await _context.VwAttributsDunites.OrderBy(x => x.NomDeFaction).ToListAsync());
+            //var baseDeDonnees_TP2Context = _context.Unites.Include(u => u.Faction);
+            //return View(await baseDeDonnees_TP2Context.ToListAsync());
         }
 
         // GET: Unites/Details/5
@@ -34,15 +36,15 @@ namespace BaseDeDonneesTP2.Controllers
                 return NotFound();
             }
 
-            var unite = await _context.Unites
-                .Include(u => u.Faction)
-                .FirstOrDefaultAsync(m => m.UniteId == id);
-            if (unite == null)
-            {
-                return NotFound();
-            }
+           string query = "EXEC Unites.usp_dataSheet @UniteID";
 
-            return View(unite);
+            List<SqlParameter> parameters = new List<SqlParameter>
+            {
+                new SqlParameter{ParameterName = "@UniteID", Value = id}
+            };
+            List<VwDataSheet> dataSheet = await _context.VwDataSheets.FromSqlRaw(query, parameters.ToArray()).ToListAsync();
+
+            return View(dataSheet);
         }
 
         // GET: Unites/Create

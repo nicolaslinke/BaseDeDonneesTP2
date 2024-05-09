@@ -1,4 +1,4 @@
-﻿@model IEnumerable<BaseDeDonneesTP2.Models.Unite>
+﻿@model IEnumerable<BaseDeDonneesTP2.Models.VwAttributsDunite>
 
 @{
     ViewData["Title"] = "Index";
@@ -14,13 +14,13 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Nom)
+                @Html.DisplayNameFor(model => model.NomDeLUnit)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CoutEnPoint)
+                @Html.DisplayNameFor(model => model.CoTEnPoint)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Faction)
+                @Html.DisplayNameFor(model => model.NomDeFaction)
             </th>
             <th></th>
         </tr>
@@ -29,13 +29,13 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Nom)
+                @Html.DisplayFor(modelItem => item.NomDeLUnit)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CoutEnPoint)
+                @Html.DisplayFor(modelItem => item.CoTEnPoint)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Faction.FactionId)
+                @Html.DisplayFor(modelItem => item.NomDeFaction)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.UniteId">Edit</a> |
