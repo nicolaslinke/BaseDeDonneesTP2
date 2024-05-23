@@ -7,6 +7,8 @@
 <h1>Abilités</h1>
 @foreach (var item in Model)
 {
-    @Html.DisplayFor(modelItem => item.Abilite.Nom)
+    <h2> @Html.DisplayFor(modelItem => item.Abilite.Nom)</h2>
+    <br/>
     @Html.DisplayFor(modelItem => item.DescriptionDeChiffrer.Description1)
+    <br/>
 }

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<BaseDeDonneesTP2.Models.VwAttributsDunite>
+﻿@model BaseDeDonneesTP2.ViewModel.FiltreUnitesVM
 
 @{
     ViewData["Title"] = "Index";
@@ -10,23 +10,101 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+
+<div class="container">
+    <h2>Toutes les unités</h2>
+    <div class="row">
+        <div class="col">
+            <form asp-action="Filtre">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="row">
+                    <!-- Chercher les participations d'un joueur par son pseudo -->
+                    <div class="form-group col-6">
+                        <label asp-for="NomUnite" class="control-label"></label>
+                        <div>
+                            <input asp-for="NomUnite" class="form-control" />
+                            <span asp-validation-for="NomUnite" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <!-- Chercher les participations pour une course en particulier -->
+                    <div class="form-group col-6">
+                        <label asp-for="Faction" class="control-label"></label>
+                        <div>
+                            <select asp-for="Faction" class="form-control">
+                                @foreach (var item in Model.Factions)
+                                {
+                                    <option value="@item.Value">@item.Text</option>
+                                }
+                            </select>
+                            <span asp-validation-for="Faction" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <!-- Ordonner les résultats par Date ou Chrono -->
+                    <div class="form-group col-6">
+                        <label asp-for="Ordre" class="control-label"></label>
+                        <div>
+                            <select asp-for="Ordre" class="form-control">
+                                @foreach (var item in Model.Ordres)
+                                {
+                                    <option value="@item.Value">@item.Text</option>
+                                }
+                            </select>
+                            <span asp-validation-for="Ordre" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <!-- Ordonner les résultats de manière croissante ou décroissante -->
+                    <div class="form-group col-6">
+                        <label asp-for="TypeOrdre" class="control-label"></label>
+                        <div>
+                            <select asp-for="TypeOrdre" class="form-control">
+                                @foreach (var item in Model.TypesOrdre)
+                                {
+                                    <option value="@item.Value">@item.Text</option>
+                                }
+                            </select>
+                            <span asp-validation-for="TypeOrdre" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row align-items-end">
+                    <div class="form-group col-3">
+                        <label asp-for="Page" class="control-label"></label>
+                        <div>
+                            <input asp-for="Page" class="form-control" />
+                            <span asp-validation-for="Page" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group col-auto">
+                        <div class="col-md-offset-2">
+                            <button type="submit" class="btn btn-light">Filtrer</button>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.NomDeLUnit)
+                Nom de l'unité
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CoTEnPoint)
+                Coût en point
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.NomDeFaction)
+                Nom de faction
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+@foreach (var item in Model.Unites) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.NomDeLUnit)

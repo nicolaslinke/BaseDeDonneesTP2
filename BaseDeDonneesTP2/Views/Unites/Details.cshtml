@@ -64,13 +64,14 @@
             }
         </tbody>
     </table>
-    @if (Model.PhotoUnite != null)
+    @if (Model.PhotoUnite.FirstOrDefault() != null)
     {
         <h3>Image de l'unité</h3>
         <img alt="Fruit" src="@(Model.PhotoUnite.FirstOrDefault() == null ? "/images/placeholder.png" : Model.PhotoUnite.FirstOrDefault())" />
     }
 </div>
 <div>
-    <a asp-action="Abilités" asp-route-id="@Model.DataSheet.FirstOrDefault()">Details</a>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Abilite" asp-route-id="@Model.DataSheet.FirstOrDefault().UniteId">Voir les abilités de l'unité</a>
+    <br/>
+    <a asp-action="Index">Revenir à l'index</a>
 </div>

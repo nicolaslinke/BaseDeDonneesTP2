@@ -9,6 +9,8 @@ namespace BaseDeDonneesTP2.Models
     [Keyless]
     public partial class VwDataSheet
     {
+        [Column("UniteID")]
+        public int UniteId { get; set; }
         [StringLength(30)]
         public string? NomUnite { get; set; }
         public int? CoutEnPoint { get; set; }

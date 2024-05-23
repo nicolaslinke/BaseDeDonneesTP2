@@ -7,4 +7,5 @@ SELECT U.UniteID, F.Nom AS [Nom de faction], U.Nom AS [Nom de l'unité], U.CoutEn
 FROM Factions.Faction F
 INNER JOIN Unites.Unite U
 ON U.FactionID = F.FactionID
+ORDER BY F.Nom
 GO

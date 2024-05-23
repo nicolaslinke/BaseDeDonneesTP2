@@ -1,1 +1,0 @@
-evolve migrate sqlserver -c "Server=.\SQLEXPRESS;Initial Catalog=BaseDeDonnees_TP2;Integrated Security=True;Persist Security Info =False;Pooling=False;MultipleActiveResultSets=False;Encrypt=False;TrustServerCertificate=False" -s Faction -s Unite -s Arme -s Modele -s Abilite -s ModeleDansUnite -s ArmeDeModele -s ArmeDistance -s ArmeRapproche -s AbiliteDUnite --target-version x.x

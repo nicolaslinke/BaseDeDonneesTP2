@@ -24,9 +24,60 @@ namespace BaseDeDonneesTP2.Controllers
         // GET: Unites
         public async Task<IActionResult> Index()
         {
-            return View(await _context.VwAttributsDunites.OrderBy(x => x.NomDeFaction).ToListAsync());
-            //var baseDeDonnees_TP2Context = _context.Unites.Include(u => u.Faction);
-            //return View(await baseDeDonnees_TP2Context.ToListAsync());
+            List<VwAttributsDunite> unites = await _context.VwAttributsDunites.Take(30).ToListAsync();
+
+            return View(new FiltreUnitesVM() { Unites = unites });
+        }
+
+        public async Task<IActionResult> Filtre(FiltreUnitesVM fuvm)
+        {
+            List<VwAttributsDunite> unites = await _context.VwAttributsDunites.ToListAsync();
+
+            if (fuvm.NomUnite != null)
+            {
+                unites = unites.Where(x => x.NomDeLUnit == fuvm.NomUnite).ToList();
+            }
+
+            if (fuvm.Faction != "Toutes")
+            {
+                unites = unites.Where(x => x.NomDeFaction == fuvm.Faction).ToList();
+            }
+
+            if (fuvm.TypeOrdre == "DESC")
+            {
+                if (fuvm.Ordre == "Faction")
+                {
+                    unites = unites.OrderByDescending(x => x.NomDeFaction).ToList();
+                }
+                else if (fuvm.Ordre == "CoutEnPoint")
+                {
+                    unites = unites.OrderByDescending(x => x.CoTEnPoint).ToList();
+                } else
+                {
+                    unites = unites.OrderByDescending(x => x.NomDeLUnit).ToList();
+                }
+            }
+            else
+            {
+                if (fuvm.Ordre == "Faction")
+                {
+                    unites = unites.OrderBy(x => x.NomDeFaction).ToList();
+                }
+                else if (fuvm.Ordre == "CoutEnPoint")
+                {
+                    unites = unites.OrderBy(x => x.CoTEnPoint).ToList();
+                }
+                else
+                {
+                    unites = unites.OrderBy(x => x.NomDeLUnit).ToList();
+                }
+            }
+
+            fuvm.Unites = unites;
+
+            unites = unites.Skip((fuvm.Page - 1) * 30).Take(30).ToList();
+
+            return View("Index", fuvm);
         }
 
         // GET: Unites/Details/5
@@ -53,30 +104,6 @@ namespace BaseDeDonneesTP2.Controllers
                                 .ToList();
 
             return View(dataSheetVM);
-        }
-
-        // GET: Unites/Create
-        public IActionResult Create()
-        {
-            ViewData["FactionId"] = new SelectList(_context.Factions, "FactionId", "FactionId");
-            return View();
-        }
-
-        // POST: Unites/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("UniteId,FactionId,Nom,CoutEnPoint")] Unite unite)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(unite);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["FactionId"] = new SelectList(_context.Factions, "FactionId", "FactionId", unite.FactionId);
-            return View(unite);
         }
 
         public async Task<IActionResult> Abilite(int? id)
@@ -190,44 +217,6 @@ namespace BaseDeDonneesTP2.Controllers
             }
             ViewData["FactionId"] = new SelectList(_context.Factions, "FactionId", "FactionId", imageVM.Unite.FactionId);
             return View(imageVM.Unite);
-        }
-
-        // GET: Unites/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null || _context.Unites == null)
-            {
-                return NotFound();
-            }
-
-            var unite = await _context.Unites
-                .Include(u => u.Faction)
-                .FirstOrDefaultAsync(m => m.UniteId == id);
-            if (unite == null)
-            {
-                return NotFound();
-            }
-
-            return View(unite);
-        }
-
-        // POST: Unites/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            if (_context.Unites == null)
-            {
-                return Problem("Entity set 'BaseDeDonnees_TP2Context.Unites'  is null.");
-            }
-            var unite = await _context.Unites.FindAsync(id);
-            if (unite != null)
-            {
-                _context.Unites.Remove(unite);
-            }
-            
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
         }
 
         private bool UniteExists(int id)
