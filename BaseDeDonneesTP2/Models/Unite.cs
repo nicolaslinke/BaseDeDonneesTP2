@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 namespace BaseDeDonneesTP2.Models
 {
     [Table("Unite", Schema = "Unites")]
+    [Index("Identifiant", Name = "UC_Unite_Identifiant", IsUnique = true)]
     public partial class Unite
     {
         public Unite()
@@ -23,6 +24,8 @@ namespace BaseDeDonneesTP2.Models
         [StringLength(30)]
         public string? Nom { get; set; }
         public int? CoutEnPoint { get; set; }
+        public Guid Identifiant { get; set; }
+        public byte[]? Photo { get; set; }
 
         [ForeignKey("FactionId")]
         [InverseProperty("Unites")]

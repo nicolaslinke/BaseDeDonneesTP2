@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using BaseDeDonneesTP2.Data;
 using BaseDeDonneesTP2.Models;
 using Microsoft.Data.SqlClient;
+using BaseDeDonneesTP2.ViewModel;
 
 namespace BaseDeDonneesTP2.Controllers
 {
@@ -80,6 +81,25 @@ namespace BaseDeDonneesTP2.Controllers
             }
 
             var unite = await _context.Unites.FindAsync(id);
+
+            if (unite == null)
+            {
+                return NotFound();
+            }
+            ImageUploadVM imageUploadVM = new ImageUploadVM();
+            imageUploadVM.Unite = unite;
+            ViewData["FactionId"] = new SelectList(_context.Factions, "FactionId", "FactionId", unite.FactionId);
+            return View(imageUploadVM);
+        }
+
+        public async Task<IActionResult> AjouterImage(int? id)
+        {
+            if (id == null || _context.Unites == null)
+            {
+                return NotFound();
+            }
+
+            var unite = await _context.Unites.FindAsync(id);
             if (unite == null)
             {
                 return NotFound();
@@ -88,28 +108,29 @@ namespace BaseDeDonneesTP2.Controllers
             return View(unite);
         }
 
-        // POST: Unites/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("UniteId,FactionId,Nom,CoutEnPoint")] Unite unite)
+        public async Task<IActionResult> AjouterImage(ImageUploadVM imageVM)
         {
-            if (id != unite.UniteId)
-            {
-                return NotFound();
-            }
-
             if (ModelState.IsValid)
             {
+                if(imageVM.FormFile != null && imageVM.FormFile.Length >= 0)
+                {
+                    MemoryStream stream = new MemoryStream();
+                    await imageVM.FormFile.CopyToAsync(stream);
+                    byte[] fichierImage = stream.ToArray();
+
+                    imageVM.Unite.Photo = fichierImage;
+                }
+
                 try
                 {
-                    _context.Update(unite);
+                    _context.Update(imageVM.Unite);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!UniteExists(unite.UniteId))
+                    if (!UniteExists(imageVM.Unite.UniteId))
                     {
                         return NotFound();
                     }
@@ -120,8 +141,69 @@ namespace BaseDeDonneesTP2.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["FactionId"] = new SelectList(_context.Factions, "FactionId", "FactionId", unite.FactionId);
-            return View(unite);
+            ViewData["FactionId"] = new SelectList(_context.Factions, "FactionId", "FactionId", imageVM.Unite.FactionId);
+            return View(imageVM.Unite);
+        }
+
+        // POST: Unites/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, ImageUploadVM imageVM)
+        {
+            if (id != imageVM.Unite.UniteId)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    if (imageVM.FormFile != null && imageVM.FormFile.Length >= 0)
+                    {
+                        MemoryStream stream = new MemoryStream();
+                        await imageVM.FormFile.CopyToAsync(stream);
+                        byte[] fichierImage = stream.ToArray();
+
+                        imageVM.Unite.Photo = fichierImage;
+                    }
+
+                    try
+                    {
+                        _context.Update(imageVM.Unite);
+                        await _context.SaveChangesAsync();
+                    }
+                    catch (DbUpdateConcurrencyException)
+                    {
+                        if (!UniteExists(imageVM.Unite.UniteId))
+                        {
+                            return NotFound();
+                        }
+                        else
+                        {
+                            throw;
+                        }
+                    }
+                    _context.Update(imageVM.Unite);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!UniteExists(imageVM.Unite.UniteId))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            ViewData["FactionId"] = new SelectList(_context.Factions, "FactionId", "FactionId", imageVM.Unite.FactionId);
+            return View(imageVM.Unite);
         }
 
         // GET: Unites/Delete/5

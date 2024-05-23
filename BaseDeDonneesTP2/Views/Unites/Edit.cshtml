@@ -1,4 +1,4 @@
-﻿@model BaseDeDonneesTP2.Models.Unite
+﻿@model BaseDeDonneesTP2.ViewModel.ImageUploadVM
 
 @{
     ViewData["Title"] = "Edit";
@@ -11,23 +11,28 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
+        <form asp-action="Edit" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="UniteId" />
+            <input type="hidden" asp-for="Unite.UniteId" />
             <div class="form-group">
-                <label asp-for="FactionId" class="control-label"></label>
-                <select asp-for="FactionId" class="form-control" asp-items="ViewBag.FactionId"></select>
-                <span asp-validation-for="FactionId" class="text-danger"></span>
+                <label asp-for="Unite.FactionId" class="control-label"></label>
+                <select asp-for="Unite.FactionId" class="form-control" asp-items="ViewBag.FactionId"></select>
+                <span asp-validation-for="Unite.FactionId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Nom" class="control-label"></label>
-                <input asp-for="Nom" class="form-control" />
-                <span asp-validation-for="Nom" class="text-danger"></span>
+                <label asp-for="Unite.Nom" class="control-label"></label>
+                <input asp-for="Unite.Nom" class="form-control" />
+                <span asp-validation-for="Unite.Nom" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CoutEnPoint" class="control-label"></label>
-                <input asp-for="CoutEnPoint" class="form-control" />
-                <span asp-validation-for="CoutEnPoint" class="text-danger"></span>
+                <label asp-for="Unite.CoutEnPoint" class="control-label"></label>
+                <input asp-for="Unite.CoutEnPoint" class="form-control" />
+                <span asp-validation-for="Unite.CoutEnPoint" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="FormFile">Fichier image: </label>
+                <input id="FormFile" name="FormFile" type="file" accept="image/*" class="form-control-file" />
+                <span asp-validation-for="FormFile" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />

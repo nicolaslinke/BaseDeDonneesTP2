@@ -19,8 +19,7 @@ namespace BaseDeDonneesTP2.Models
         public int AbiliteId { get; set; }
         [StringLength(30)]
         public string? Nom { get; set; }
-        [StringLength(1000)]
-        public string? Description { get; set; }
+        public byte[]? DescriptionEncrypt { get; set; }
 
         [InverseProperty("Abilite")]
         public virtual ICollection<AbiliteDunite> AbiliteDunites { get; set; }

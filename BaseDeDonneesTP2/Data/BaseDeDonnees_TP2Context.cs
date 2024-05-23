@@ -24,6 +24,7 @@ namespace BaseDeDonneesTP2.Data
         public virtual DbSet<ArmeDistance> ArmeDistances { get; set; } = null!;
         public virtual DbSet<ArmeRapproche> ArmeRapproches { get; set; } = null!;
         public virtual DbSet<Changelog> Changelogs { get; set; } = null!;
+        public virtual DbSet<Description> Descriptions { get; set; } = null!;
         public virtual DbSet<Faction> Factions { get; set; } = null!;
         public virtual DbSet<Modele> Modeles { get; set; } = null!;
         public virtual DbSet<ModeleDansUnite> ModeleDansUnites { get; set; } = null!;
@@ -111,6 +112,8 @@ namespace BaseDeDonneesTP2.Data
 
             modelBuilder.Entity<Unite>(entity =>
             {
+                entity.Property(e => e.Identifiant).HasDefaultValueSql("(newid())");
+
                 entity.HasOne(d => d.Faction)
                     .WithMany(p => p.Unites)
                     .HasForeignKey(d => d.FactionId)
