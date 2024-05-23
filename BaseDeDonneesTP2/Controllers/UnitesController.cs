@@ -44,8 +44,15 @@ namespace BaseDeDonneesTP2.Controllers
                 new SqlParameter{ParameterName = "@UniteID", Value = id}
             };
             List<VwDataSheet> dataSheet = await _context.VwDataSheets.FromSqlRaw(query, parameters.ToArray()).ToListAsync();
+            DataSheetVM dataSheetVM = new DataSheetVM();
 
-            return View(dataSheet);
+            dataSheetVM.DataSheet = dataSheet;
+
+            dataSheetVM.PhotoUnite = dataSheet
+                                .Select(x => x.Photo == null ? null : $"data:image/png;base64, {Convert.ToBase64String(x.Photo)}")
+                                .ToList();
+
+            return View(dataSheetVM);
         }
 
         // GET: Unites/Create
@@ -72,8 +79,40 @@ namespace BaseDeDonneesTP2.Controllers
             return View(unite);
         }
 
-        // GET: Unites/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Abilite(int? id)
+        {
+            if (id == null || _context.Unites == null)
+            {
+                return NotFound();
+            }
+            List<AbiliteDunite> abiliteDunites = await _context.AbiliteDunites.Where(x => x.UniteId == id).ToListAsync();
+            List<Abilite> abilites = new List<Abilite>();
+            List<AbiliteDeChiffrerVM> abilitesDeChiffrer = new List<AbiliteDeChiffrerVM>();
+            if (abiliteDunites != null)
+            {
+                foreach (var item in abiliteDunites)
+                {
+                    abilites.Add(_context.Abilites.Where(x => x.AbiliteId == item.AbiliteId).FirstOrDefault());
+                }
+
+                foreach (var item in abilites)
+                {
+                    string query = "EXEC Abilites.USP_DecryptDescription @AbiliteID";
+                    SqlParameter parameter = new SqlParameter { ParameterName = "@AbiliteID", Value = item.AbiliteId };
+                    Description? descriptionDeChiffrer = (await _context.Descriptions.FromSqlRaw(query, parameter).ToListAsync()).FirstOrDefault();
+
+                    AbiliteDeChiffrerVM abiliteDeChiffrerVM = new AbiliteDeChiffrerVM();
+                    abiliteDeChiffrerVM.DescriptionDeChiffrer = descriptionDeChiffrer;
+                    abiliteDeChiffrerVM.Abilite = item;
+
+                    abilitesDeChiffrer.Add(abiliteDeChiffrerVM);
+                }
+            }
+
+            return View(abilitesDeChiffrer);
+        }
+            // GET: Unites/Edit/5
+            public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Unites == null)
             {
@@ -90,59 +129,6 @@ namespace BaseDeDonneesTP2.Controllers
             imageUploadVM.Unite = unite;
             ViewData["FactionId"] = new SelectList(_context.Factions, "FactionId", "FactionId", unite.FactionId);
             return View(imageUploadVM);
-        }
-
-        public async Task<IActionResult> AjouterImage(int? id)
-        {
-            if (id == null || _context.Unites == null)
-            {
-                return NotFound();
-            }
-
-            var unite = await _context.Unites.FindAsync(id);
-            if (unite == null)
-            {
-                return NotFound();
-            }
-            ViewData["FactionId"] = new SelectList(_context.Factions, "FactionId", "FactionId", unite.FactionId);
-            return View(unite);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AjouterImage(ImageUploadVM imageVM)
-        {
-            if (ModelState.IsValid)
-            {
-                if(imageVM.FormFile != null && imageVM.FormFile.Length >= 0)
-                {
-                    MemoryStream stream = new MemoryStream();
-                    await imageVM.FormFile.CopyToAsync(stream);
-                    byte[] fichierImage = stream.ToArray();
-
-                    imageVM.Unite.Photo = fichierImage;
-                }
-
-                try
-                {
-                    _context.Update(imageVM.Unite);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!UniteExists(imageVM.Unite.UniteId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["FactionId"] = new SelectList(_context.Factions, "FactionId", "FactionId", imageVM.Unite.FactionId);
-            return View(imageVM.Unite);
         }
 
         // POST: Unites/Edit/5

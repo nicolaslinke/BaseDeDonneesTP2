@@ -28,7 +28,7 @@ app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllerRoute(
         name: "default",
-        pattern: "{controller=Series}/{action=Index}/{id?}"
+        pattern: "{controller=Unites}/{action=Index}/{id?}"
         );
 });
 

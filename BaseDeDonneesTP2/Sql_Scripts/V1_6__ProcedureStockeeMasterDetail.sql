@@ -2,7 +2,7 @@ USE BaseDeDonnees_TP2
 GO
 
 CREATE VIEW Unites.vw_dataSheet AS
-SELECT U.Nom [NomUnite], U.CoutEnPoint, MU.NbModele, M.Nom as [NomModele], M.Mouvement, M.Endurance, M.Sauvegarde, M.Pv, M.Commandement, M.Co as [ControleObjectif]
+SELECT U.UniteID, U.Nom [NomUnite], U.CoutEnPoint, MU.NbModele, M.Nom as [NomModele], M.Mouvement, M.Endurance, M.Sauvegarde, M.Pv, M.Commandement, M.Co as [ControleObjectif], U.Photo
 	FROM Unites.Unite U
 	INNER JOIN Unites.ModeleDansUnite MU
 	ON U.UniteID = MU.UniteID
@@ -15,7 +15,7 @@ CREATE PROCEDURE Unites.usp_dataSheet
 (@UniteID int)
 AS
 BEGIN
-	SELECT U.Nom [NomUnite], U.CoutEnPoint, MU.NbModele, M.Nom as [NomModele], M.Mouvement, M.Endurance, M.Sauvegarde, M.Pv, M.Commandement, M.Co as [ControleObjectif]
+	SELECT U.UniteID, U.Nom [NomUnite], U.CoutEnPoint, MU.NbModele, M.Nom as [NomModele], M.Mouvement, M.Endurance, M.Sauvegarde, M.Pv, M.Commandement, M.Co as [ControleObjectif], U.Photo
 	FROM Unites.Unite U
 	INNER JOIN Unites.ModeleDansUnite MU
 	ON U.UniteID = MU.UniteID

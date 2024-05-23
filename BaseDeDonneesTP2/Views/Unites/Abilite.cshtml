@@ -1,0 +1,12 @@
+﻿@model IEnumerable<BaseDeDonneesTP2.ViewModel.AbiliteDeChiffrerVM>
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Abilités</h1>
+@foreach (var item in Model)
+{
+    @Html.DisplayFor(modelItem => item.Abilite.Nom)
+    @Html.DisplayFor(modelItem => item.DescriptionDeChiffrer.Description1)
+}

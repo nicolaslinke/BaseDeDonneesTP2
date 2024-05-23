@@ -21,5 +21,6 @@ namespace BaseDeDonneesTP2.Models
         public int? Pv { get; set; }
         public int? Commandement { get; set; }
         public int? ControleObjectif { get; set; }
+        public byte[]? Photo { get; set; }
     }
 }

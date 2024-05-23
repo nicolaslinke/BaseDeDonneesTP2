@@ -1,4 +1,4 @@
-﻿@model IEnumerable<BaseDeDonneesTP2.Models.VwDataSheet>
+﻿@model BaseDeDonneesTP2.ViewModel.DataSheetVM
 @{
     ViewData["Title"] = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -7,36 +7,36 @@
 <h1>Details</h1>
 
 <div>
-    <h4>@Html.DisplayFor(modelItem => Model.FirstOrDefault().NomUnite)</h4>
-    <h3>@Html.DisplayFor(modelItem => Model.FirstOrDefault().CoutEnPoint)</h3>
+    <h4>@Html.DisplayFor(modelItem => Model.DataSheet.FirstOrDefault().NomUnite)</h4>
+    <h3>@Html.DisplayFor(modelItem => Model.DataSheet.FirstOrDefault().CoutEnPoint)</h3>
     <table class="table">
         <thead>
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.NomModele)
+                    @Html.DisplayNameFor(model => model.DataSheet.FirstOrDefault().NomModele)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Mouvement)
+                    @Html.DisplayNameFor(model => model.DataSheet.FirstOrDefault().Mouvement)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Endurance)
+                    @Html.DisplayNameFor(model => model.DataSheet.FirstOrDefault().Endurance)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Sauvegarde)
+                    @Html.DisplayNameFor(model => model.DataSheet.FirstOrDefault().Sauvegarde)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Pv)
+                    @Html.DisplayNameFor(model => model.DataSheet.FirstOrDefault().Pv)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Commandement)
+                    @Html.DisplayNameFor(model => model.DataSheet.FirstOrDefault().Commandement)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.ControleObjectif)
+                    @Html.DisplayNameFor(model => model.DataSheet.FirstOrDefault().ControleObjectif)
                 </th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model)
+            @foreach (var item in Model.DataSheet)
             {
                 <tr>
                     <td>
@@ -64,7 +64,13 @@
             }
         </tbody>
     </table>
+    @if (Model.PhotoUnite != null)
+    {
+        <h3>Image de l'unité</h3>
+        <img alt="Fruit" src="@(Model.PhotoUnite.FirstOrDefault() == null ? "/images/placeholder.png" : Model.PhotoUnite.FirstOrDefault())" />
+    }
 </div>
 <div>
+    <a asp-action="Abilités" asp-route-id="@Model.DataSheet.FirstOrDefault()">Details</a>
     <a asp-action="Index">Back to List</a>
 </div>
